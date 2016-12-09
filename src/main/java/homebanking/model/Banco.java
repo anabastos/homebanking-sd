@@ -1,6 +1,7 @@
 package homebanking.model;
 
 import java.util.*;
+import javax.persistence.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -20,7 +21,8 @@ public class Banco {
 	protected Banco() {}
 
 	@PersistenceConstructor
-	public Banco(String nome) {
+	public Banco(long id, String nome) {
+		this.codigo = id;
 		this.nome = nome;
 	}
 

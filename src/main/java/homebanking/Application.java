@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.concurrent.atomic.AtomicLong;
 import homebanking.model.Cliente;
-import homebanking.service.HomeBanking;
+import homebanking.service.HomeBankingServiceImpl;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
@@ -14,7 +14,7 @@ public class Application implements CommandLineRunner {
 	private static final AtomicLong counter = new AtomicLong();
 
 	@Autowired
-	private HomeBanking repository;
+	private HomeBankingServiceImpl repository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -44,10 +44,6 @@ public class Application implements CommandLineRunner {
 			System.out.println(customer);
 		}
 
-			// System.out.println("Cliente found with findByName 'Jack'):");
-			// System.out.println("--------------------------------------------");
-			// for (Cliente jack : repository.findByNome("Jack")) {
-			// 	System.out.println(jack.toString());
-			// }
+
 	}
 }

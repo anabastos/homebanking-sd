@@ -2,7 +2,7 @@ package homebanking.controller;
 
 import java.util.List;
  
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,19 +14,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
  
-import homebanking.service.ClienteService;
+import homebanking.service.HomeBankingService;
 import homebanking.model.Cliente;
 
 @RestController
 public class HomeBankingRestController {
   
-    @Autowired
-    ClienteService clienteService; 
+    //@Autowired
+    HomeBankingService clienteService; 
   
       
     @RequestMapping(value = "/cliente/", method = RequestMethod.GET)
     public ResponseEntity<List<Cliente>> listAllClientes() {
-        List<Cliente> clientes = clienteService.findAllClientes();
+        List<Cliente> clientes = clienteService.findAll();
         if(clientes.isEmpty()){
             return new ResponseEntity<List<Cliente>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
         }
@@ -48,12 +48,12 @@ public class HomeBankingRestController {
     public ResponseEntity<Void> createCliente(@RequestBody Cliente cliente,    UriComponentsBuilder ucBuilder) {
         System.out.println("Creating Cliente " + cliente.getNome());
   
-        if (clienteService.isClienteExist(cliente)) {
+        if (clienteService.autenticarCliente(cliente)) {
             System.out.println("A Cliente with nome " + cliente.getNome() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
   
-        clienteService.saveCliente(cliente);
+        clienteService.save(cliente);
   
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/cliente/{id}").buildAndExpand(cliente.getId()).toUri());
@@ -75,7 +75,7 @@ public class HomeBankingRestController {
         currentCliente.setCpf(cliente.getCpf());
         currentCliente.setSenha(cliente.getSenha());
           
-        clienteService.updateCliente(currentCliente);
+        clienteService.update(currentCliente);
         return new ResponseEntity<Cliente>(currentCliente, HttpStatus.OK);
     }
   
@@ -98,7 +98,7 @@ public class HomeBankingRestController {
     public ResponseEntity<Cliente> deleteAllClientes() {
         System.out.println("Deleting All Clientes");
   
-        clienteService.deleteAllClientes();
+        clienteService.deleteAll();
         return new ResponseEntity<Cliente>(HttpStatus.NO_CONTENT);
     }
   

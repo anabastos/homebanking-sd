@@ -1,6 +1,6 @@
 package homebanking.model;
 
-// import javax.persistence.*;
+import javax.persistence.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.annotation.PersistenceConstructor;
@@ -11,7 +11,6 @@ public class Cliente {
 
     @Id
     private long id;
-
     private String nome;
     private String cpf;
     private String senha;

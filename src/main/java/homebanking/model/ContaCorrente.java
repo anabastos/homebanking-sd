@@ -1,6 +1,6 @@
 package homebanking.model;
 
-// import javax.persistence.*;
+import javax.persistence.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.annotation.PersistenceConstructor;
@@ -18,7 +18,8 @@ public class ContaCorrente {
 	protected ContaCorrente() {}
 
 	@PersistenceConstructor
-	public ContaCorrente(float saldo) {
+	public ContaCorrente(long numero, float saldo) {
+		this.numero = numero;
 		this.saldo = saldo;
 	}
 
@@ -31,20 +32,12 @@ public class ContaCorrente {
 	}
 
 	//consultar
-	public Float getSaldo(){
+	public float getSaldo(){
 		return saldo;
 	}
 
-	public void setSaldo(Float saldo){
+	public void setSaldo(float saldo){
 		this.saldo = saldo;
-	}
-
-	public void depositar(Float valor) {
-		this.saldo = saldo + valor;
-	}
-
-	public void retirar(Float valor) {
-		this.saldo = saldo - valor;
 	}
 
     public Agencia getAgencia() {

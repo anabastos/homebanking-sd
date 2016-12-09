@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Id;
+import javax.persistence.*;
 import java.util.*;
 
 @Document (collection = "agencia")
@@ -13,7 +14,6 @@ public class Agencia {
 
     @Id
     private long id;
-
     private String nome;
     private String endereco;
     private String senha;

@@ -13,7 +13,7 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 jar {
-    baseName = 'gs-accessing-data-mongodb'
+    baseName = 'homebanking'
     version =  '0.1.0'
 }
 
@@ -27,6 +27,6 @@ targetCompatibility = 1.8
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
 	compile("org.springframework.boot:spring-boot-starter-web")
-    testCompile("org.springframework.boot:spring-boot-starter-test")
+    // providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 
