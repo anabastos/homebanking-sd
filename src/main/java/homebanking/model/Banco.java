@@ -1,6 +1,4 @@
-package homebanking;
-
-// import javax.persistence.*;
+package homebanking.model;
 
 import java.util.*;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,7 +10,7 @@ import org.springframework.data.annotation.Id;
 @Document (collection = "banco")
 public class Banco {
 
-    @Id private Long codigo;
+    @Id private long codigo;
 	private String nome;
 
 	@Field("agencias")
@@ -26,11 +24,11 @@ public class Banco {
 		this.nome = nome;
 	}
 
-	public Long getCodigo(){
+	public long getCodigo(){
 		return codigo;
 	}
 
-	public void setCodigo(Long codigo){
+	public void setCodigo(long codigo){
 		this.codigo = codigo;
 	}
 
@@ -42,7 +40,6 @@ public class Banco {
 		this.nome = nome;
 	}
 
-	// @OneToMany(mappedBy = "banco", cascade = CascadeType.ALL)
 	public Set<Agencia> getAgencias() {
 		return Collections.unmodifiableSet(agencias);
 	}

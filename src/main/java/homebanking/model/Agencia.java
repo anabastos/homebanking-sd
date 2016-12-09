@@ -1,4 +1,4 @@
-package homebanking;
+package homebanking.model;
 
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,7 +12,7 @@ import java.util.*;
 public class Agencia {
 
     @Id
-    private Long id;
+    private long id;
 
     private String nome;
     private String endereco;
@@ -35,11 +35,11 @@ public class Agencia {
         this.banco = banco;
     }
 
-    public Long getId(){
+    public long getId(){
         return id;
     }
 
-    public void setId(Long id){
+    public void setId(long id){
         this.id = id;
     }
 
@@ -59,11 +59,6 @@ public class Agencia {
         this.endereco = endereco;
     }
 
-    // public void setAgencia(Agencia agencia) {
-    //     this.agencia = agencia;
-    // }
-    // @ManyToOne
-    // @JoinColumn(name = "codigo")
     public Banco getBanco() {
         return banco;
     }
@@ -72,17 +67,8 @@ public class Agencia {
         this.banco = banco;
     }
 
-    // @OneToMany(mappedBy = "agencia", cascade = CascadeType.ALL)
     public Set<ContaCorrente> getContas() {
      return Collections.unmodifiableSet(contas);
-    }
-
-    public void abrirContaCorrente(){
-
-    }
-
-    public void fecharContaCorrente(){
-
     }
 
     @Override

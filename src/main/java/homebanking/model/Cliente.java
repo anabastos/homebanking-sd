@@ -1,4 +1,4 @@
-package homebanking;
+package homebanking.model;
 
 // import javax.persistence.*;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 public class Cliente {
 
     @Id
-    private String id;
+    private long id;
 
     private String nome;
     private String cpf;
@@ -21,17 +21,18 @@ public class Cliente {
     protected Cliente() {}
 
     @PersistenceConstructor
-    public Cliente(String nome, String cpf, String senha) {
+    public Cliente(long id, String nome, String cpf, String senha) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.senha = senha;
     }
 
-    public String getId(){
+    public long getId(){
         return id;
     }
 
-    public void setId(String id){
+    public void setId(long id){
         this.id = id;
     }
 

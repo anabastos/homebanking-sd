@@ -1,4 +1,4 @@
-package homebanking;
+package homebanking.model;
 
 // import javax.persistence.*;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 public class ContaCorrente {
 
     @Id
-	private Long numero;
+	private long numero;
 	private float saldo;
 	@Field("agencia")
 	private Agencia agencia;
@@ -22,11 +22,11 @@ public class ContaCorrente {
 		this.saldo = saldo;
 	}
 
-	public Long getNumero(){
+	public long getNumero(){
 		return numero;
 	}
 
-	public void setNumero(Long numero){
+	public void setNumero(long numero){
 		this.numero = numero;
 	}
 
