@@ -50,7 +50,7 @@ public class CustomerRepositoryTests {
     @Test
     public void setsIdOnSave() {
 
-        Customer dave = repository.save(new Customer("Dave", "Matthews"));
+        Customer dave = repository.save(new Customer("Dave", "Matthes"));
 
         assertThat(dave.id).isNotNull();
     }

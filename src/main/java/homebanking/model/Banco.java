@@ -2,8 +2,11 @@ package homebanking;
 
 // import javax.persistence.*;
 
-import java.util.Set;
+import java.util.*;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Id;
 
 @Document (collection = "banco")
@@ -11,10 +14,14 @@ public class Banco {
 
     @Id private Long codigo;
 	private String nome;
-	//private SetAgencia> agencias;
+
+	@Field("agencias")
+	@DBRef
+	private Set<Agencia> agencias = new HashSet<Agencia>();
 
 	protected Banco() {}
 
+	@PersistenceConstructor
 	public Banco(String nome) {
 		this.nome = nome;
 	}
@@ -36,13 +43,9 @@ public class Banco {
 	}
 
 	// @OneToMany(mappedBy = "banco", cascade = CascadeType.ALL)
-	// public Set<Agencia> getAgencias() {
-	// 	return agencias;
-	// }
-
-	// public void setAgencias(Set<Agencia> agencias) {
-	// 	this.agencias = agencias;
-	// }
+	public Set<Agencia> getAgencias() {
+		return Collections.unmodifiableSet(agencias);
+	}
 
 	@Override
 	public String toString() {

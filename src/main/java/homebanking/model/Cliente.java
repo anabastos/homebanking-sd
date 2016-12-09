@@ -2,6 +2,8 @@ package homebanking;
 
 // import javax.persistence.*;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Id;
 
 @Document (collection = "cliente")
@@ -13,10 +15,12 @@ public class Cliente {
     private String nome;
     private String cpf;
     private String senha;
+    @Field("conta_corrente")
     private ContaCorrente contaCorrente;
 
     protected Cliente() {}
 
+    @PersistenceConstructor
     public Cliente(String nome, String cpf, String senha) {
         this.nome = nome;
         this.cpf = cpf;

@@ -2,6 +2,8 @@ package homebanking;
 
 // import javax.persistence.*;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Id;
 
 @Document (collection = "conta_corrente")
@@ -10,13 +12,12 @@ public class ContaCorrente {
     @Id
 	private Long numero;
 	private float saldo;
-
-	// @DBRef
-	// @CascadeSave
+	@Field("agencia")
 	private Agencia agencia;
 
 	protected ContaCorrente() {}
 
+	@PersistenceConstructor
 	public ContaCorrente(float saldo) {
 		this.saldo = saldo;
 	}
@@ -46,16 +47,10 @@ public class ContaCorrente {
 		this.saldo = saldo - valor;
 	}
 
-    // @ManyToOne
-    // @JoinColumn(name = "codigo")
     public Agencia getAgencia() {
         return agencia;
     }
 
-    public void setAgencia(Agencia agencia) {
-        this.agencia = agencia;
-    }
-    
 	@Override
 	public String toString() {
 		return "Conta " + numero + ": "  + saldo + "RS";

@@ -1,8 +1,12 @@
 package homebanking;
 
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Id;
-// import javax.persistence.*;
+import java.util.*;
 
 @Document (collection = "agencia")
 public class Agencia {
@@ -13,17 +17,22 @@ public class Agencia {
     private String nome;
     private String endereco;
     private String senha;
+
+    @Field("banco")
     private Banco banco;
 
-    // @DBRef
-    // private Collection<ContaCorrente> contas;
+    //nao precisa de one to many pq ele ja ve q eh 1-x
+    @Field("contas")
+    @DBRef
+    private Set<ContaCorrente> contas = new HashSet<ContaCorrente>();
 
     protected Agencia() {}
 
+    @PersistenceConstructor
     public Agencia(String nome, String endereco, Banco banco) {
         this.nome = nome;
         this.endereco = endereco;
-        // this.banco = banco;
+        this.banco = banco;
     }
 
     public Long getId(){
@@ -64,13 +73,9 @@ public class Agencia {
     }
 
     // @OneToMany(mappedBy = "agencia", cascade = CascadeType.ALL)
-    // public Collection<ContaCorrente> getContas() {
-    //  return contas;
-    // }
-
-    // public void setAgencias(Collection<ContaCorrente> contas) {
-    //  this.contas = contas;
-    // }
+    public Set<ContaCorrente> getContas() {
+     return Collections.unmodifiableSet(contas);
+    }
 
     public void abrirContaCorrente(){
 
